@@ -14,6 +14,19 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"languages": [
+			{
+				"id": "hybrid-program",
+				"extensions": [".hp"]
+			}
+		],
+		"grammars": [
+			{
+				"language": "hybrid-program",
+				"scopeName": "text.hp",
+				"path": "./syntaxes/hpgrammar.json"
+			}
+		],
 		"commands": [
 			{
 				"command": "extension.hybrid-programs",
