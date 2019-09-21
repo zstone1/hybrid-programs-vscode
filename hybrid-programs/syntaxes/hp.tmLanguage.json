@@ -1,6 +1,7 @@
 {
     "scopeName": "source.hybrid-program",
     "patterns": [
+      { "include": "#program" },
       { "include": "#prop"},
       { "include": "#term" }
     ],
@@ -8,7 +9,7 @@
       "term": {
         "patterns":[
           {"include": "#arglist"},
-          {"include": "#operator"},
+          {"include": "#arithOp"},
           {"include": "#variable"},
           {"include": "#realLiteral"}
         ],
@@ -17,30 +18,171 @@
       "prop": {
         "patterns":[
           {"include":"#logicRel"},
-          {"include":"#logicOp"}
+          {"include":"#logicOp"},
+          {"include":"#quantifier"},
+          {"include":"#paren-enclosed"},
+          {"include":"#boxmodality"},
+          {"include":"#diamondmodality"}
         ],
         "name": "proposition"
       },
-      "logicOp": {
-        "match": "&&|\\|\\||->|<->",
-        "name": "symbol.logic.operator"
-      },
-      "logicRel": {
-        "match": "==|>=|>|<=|<|!=",
-        "name": "symbol.logic.relation"
+      "program": {
+        "patterns":[
+          {"include": "#assignment"},
+          {"include": "#ode"},
+          {"include": "#testProp"},
+          {"include": "#programOp"},
+          {"include": "#brace-enclosed"}
+        ],
+        "name": "program"
       },
 
+      "boxmodality":{
+        "begin":"\\[",
+        "beginCaptures":{"0":{"name":"punctuation.modality.box.open"}},
+        "end":"\\]",
+        "endCaptures":{"0":{"name":"punctuation.modality.box.close"}},
+        "patterns":[
+          {"include":"#program"}
+        ],
+        "name":"box"
+      },
+      "diamondmodality":{
+        "begin":"\\<",
+        "beginCaptures":{"0":{"name":"punctuation.modality.diamond.open"}},
+        "end":"\\>",
+        "endCaptures":{"0":{"name":"punctuation.modality.diamond.close"}},
+        "patterns":[
+          {"include":"#program"}
+        ],
+        "name":"diamond"
+      },
+      "programOp":{
+        "match": "\\+\\+",
+        "name": "punctuation.union"
+      },
+      "paren-enclosed":{
+        "begin":"\\(",
+        "beginCaptures":{
+          "0": {"name" : "punctuation.parens.open"}
+        },
+        "end":"\\)",
+        "endCaptures":{
+          "0": {"name" : "punctuation.parens.close"}
+        },
+        "patterns": [
+          {"include": "#prop"},
+          {"include": "#term"}
+        ],
+        "name": "propParens"
+      },
+      "starAssign":{
+        "match":"\\*",
+        "name": "puncutation.assignStar"
+      },
+      "brace-enclosed":{
+        "begin":"{",
+        "beginCaptures":{
+          "0": {"name" : "punctuation.curly.open"}
+        },
+        "end":"}",
+        "endCaptures":{
+          "0": {"name" : "punctuation.curly.close"}
+        },
+        "patterns": [
+          {"include": "#program"}
+        ],
+        "name": "braced"
+      },
+      "assignment":{
+        "begin":"\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*(:=)",
+        "beginCaptures":{
+          "1": {"name" : "variable"},
+          "2": {"name" : "punctuation.assignment"}
+        },
+        "end": ";",
+        "endjCaptures":{
+          "0": {"name" : "punctuation.semi"}
+        },
+        "patterns": [
+          {"include": "#starAssign"},
+          {"include": "#term"}
+        ],
+        "name": "program.assignment"
+      },
+      "repeatProg":{
+        "begin":"{",
+        "beginCaptures":{ "0" :{"name":"punctuation.curly.open"}},
+        "end":"(})(*)",
+        "endCaptures":{ 
+          "1" :{"name":"punctuation.curly.close"},
+          "2" :{"name":"punctuation.program.repeat"}
+        },
+        "patterns":[
+          {"include":"#program"}
+        ],
+        "name": "program.repeat"
+      },
+      "testProp":{
+        "begin":"\\?",
+        "beginCaptures":{ "0" :{"name":"punctuation.test"}},
+        "end":";",
+        "endCaptures":{ "0" :{"name":"punctuation.semi"}},
+        "patterns":[
+          {"include":"#prop"},
+          {"include": "#term"}
+        ],
+        "name": "program.test"
+      },
+      "domain-constraint":{
+        "match":"&",
+        "name":"punctuation.domain"
+      },
+      "ode":{
+        "begin":"({)\\s*([a-zA-Z_][a-zA-Z0-9_]*)(')\\s*(=)",
+        "beginCaptures":{
+          "1": {"name": "punctuation.curly.open"},
+          "2": {"name": "variable"},
+          "3": {"name": "punctuation.prime"},
+          "4": {"name": "punctuation.ode.equals"}
+        },
+        "end": "}",
+        "endCaptures":{
+          "0" : {"name":"punctuation.curly.close"}
+        },
+        "patterns":[
+          {"include":"#term"},
+          {"include":"#domain-constraint"},
+          {"include":"#prop"}
+        ],
+        "name": "program.ode"
+      },
+      "logicOp": {
+        "match": "&&|\\|\\||->|<->|!",
+        "name": "keyword.logic.operator"
+      },
+      "quantifier": {
+        "match" : "(\\\\forall|\\\\exists)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
+        "captures": {
+          "1": { "name": "keyword.quantifier"},
+          "2": { "name": "variable"}
+        }
+      },
+      "logicRel": {
+        "match": ">=|>|<=|<|!=|=",
+        "name": "keyword.logic.relation"
+      },
       "variable": { 
-        "match": " *[a-zA-Z_][a-zA-Z0-9_]* *",
-        "name": "variable"
+        "match": "\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
+        "captures":{"0":{"name": "variable"}}
       },
       "realLiteral": {
-        "match": " *[0-9]*(\\.[0-9]+)? *",
-        "name": "constant.numeric.real"
+        "match": "\\s*[0-9]+(\\.[0-9]+)?\\s*",
+        "captures":{"0":{"name": "constant.numeric.real"}}
       },
-      "operator": {
-        "match": "\\+|\\*|\\-|\\/",
-        "name": "symbol.arith.operator"
+      "arithOp": {
+        "match": "\\+|\\*|\\-|\\/|\\^",
+        "name": "keyword.arith.operator"
       },
       "comma":{
         "match": ",",
@@ -49,11 +191,16 @@
       "arglist": {
         "begin":"\\(",
         "end": "\\)",
+        "beginCaptures":{
+          "0": {"name" : "punctuation.parens.open"}
+        },
+        "endCaptures":{
+          "0": {"name" : "punctuation.parens.close"}
+        },
         "patterns" : [
           {"include": "#comma"},
           {"include": "#term"}
-        ],
-        "name": "arglist"
+        ]
       }
     }
 }
