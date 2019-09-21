@@ -59,7 +59,7 @@
       },
       "programOp":{
         "match": "\\+\\+",
-        "name": "punctuation.union"
+        "name": "keyword.program.union"
       },
       "paren-enclosed":{
         "begin":"\\(",
@@ -78,16 +78,17 @@
       },
       "starAssign":{
         "match":"\\*",
-        "name": "puncutation.assignStar"
+        "name": "keyword.program.assignStar"
       },
       "brace-enclosed":{
         "begin":"{",
         "beginCaptures":{
           "0": {"name" : "punctuation.curly.open"}
         },
-        "end":"}",
+        "end":"(})(\\*?)",
         "endCaptures":{
-          "0": {"name" : "punctuation.curly.close"}
+          "1": {"name" : "punctuation.curly.close"},
+          "2": {"name" : "keyword.program.repeat"}
         },
         "patterns": [
           {"include": "#program"}
