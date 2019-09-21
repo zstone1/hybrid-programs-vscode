@@ -23,8 +23,8 @@
 		"grammars": [
 			{
 				"language": "hybrid-program",
-				"scopeName": "text.hp",
-				"path": "./syntaxes/hpgrammar.json"
+				"scopeName": "source.hybrid-program",
+				"path": "./syntaxes/hp.tmLanguage.json"
 			}
 		],
 		"commands": [
