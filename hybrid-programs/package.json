@@ -14,10 +14,24 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Example configuration",
+			"properties": {
+				"languageServerExample.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				}
+			}
+		},
 		"languages": [
 			{
 				"id": "hybrid-program",
-				"extensions": [".hp"]
+				"extensions": [
+					".hp"
+				]
 			}
 		],
 		"grammars": [
@@ -46,10 +60,14 @@
 		"@types/mocha": "^5.2.6",
 		"@types/node": "^10.12.21",
 		"@types/vscode": "^1.38.0",
+		"@types/vscode-languageclient": "^5.2.1",
 		"glob": "^7.1.4",
 		"mocha": "^6.1.4",
+		"tslint": "^5.20.0",
 		"typescript": "^3.3.1",
-		"tslint": "^5.12.1",
 		"vscode-test": "^1.2.0"
+	},
+	"dependencies": {
+		"vscode": "^1.1.36"
 	}
 }
