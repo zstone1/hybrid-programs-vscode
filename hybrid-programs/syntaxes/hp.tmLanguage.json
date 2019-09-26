@@ -8,6 +8,7 @@
     "repository": {
       "term": {
         "patterns":[
+          { "include": "#comment" },
           {"include": "#arglist"},
           {"include": "#arithOp"},
           {"include": "#variable"},
@@ -123,6 +124,11 @@
           {"include":"#program"}
         ],
         "name": "program.repeat"
+      },
+      "comment":{
+        "begin": "\\/\\*",
+        "end": "\\*\\/",
+        "name":"comment.block"
       },
       "testProp":{
         "begin":"\\?",
