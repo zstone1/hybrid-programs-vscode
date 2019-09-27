@@ -24,7 +24,7 @@ version := "1.0"
 // Want to use a published library in your project?
 // You can define other libraries as dependencies in your build like this:
 libraryDependencies += "org.typelevel" %% "cats-core" % "1.6.0"
-libraryDependencies += "org.eclipse.lsp4j" % "org.eclipse.lsp4j" % "0.1.0.M4"
+libraryDependencies += "org.eclipse.lsp4j" % "org.eclipse.lsp4j" % "0.8.1"
 
 // Here, `libraryDependencies` is a set of dependencies, and by using `+=`,
 // we're adding the cats dependency to the set of dependencies that sbt will go
