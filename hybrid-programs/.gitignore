@@ -1,2 +1,8 @@
 out/
+.metals/
 package-lock.json
+hpserver/.metals/
+hpserver/.bloop/
+hpserver/target/
+hpserver/project/.bloop/
+hpserver/project/target/
