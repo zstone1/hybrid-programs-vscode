@@ -15,6 +15,8 @@ scalaVersion := "2.12.8"
 name := "hpserver"
 organization := "ch.epfl.scala"
 version := "1.0"
+enablePlugins(JavaAppPackaging)
+mainClass in Compile := Some("main.MainLaunch")
 
 // Note, it's not required for you to define these three settings. These are
 // mostly only necessary if you intend to publish your library's binaries on a
@@ -25,7 +27,6 @@ version := "1.0"
 // You can define other libraries as dependencies in your build like this:
 libraryDependencies += "org.typelevel" %% "cats-core" % "1.6.0"
 libraryDependencies += "org.eclipse.lsp4j" % "org.eclipse.lsp4j" % "0.8.1"
-
 // Here, `libraryDependencies` is a set of dependencies, and by using `+=`,
 // we're adding the cats dependency to the set of dependencies that sbt will go
 // and fetch when it starts up.

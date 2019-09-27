@@ -6,3 +6,4 @@ hpserver/.bloop/
 hpserver/target/
 hpserver/project/.bloop/
 hpserver/project/target/
+hpserver/project/project/

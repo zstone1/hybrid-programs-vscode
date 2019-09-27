@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.hybrid-programs"
+		"onLanguage:hybrid-program"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
