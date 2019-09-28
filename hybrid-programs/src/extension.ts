@@ -61,5 +61,7 @@ function launchLSPClient(context: vscode.ExtensionContext) {
 	client = new LanguageClient('languageServerExample', 'Language Server Example', serverOptions, clientOptions);
 
 	// Start the client. This will also launch the server
-	client.start();
+	client.start();	
+	console.log("client started");
+
 }

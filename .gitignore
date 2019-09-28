@@ -1,1 +1,9 @@
 hybrid-programs/node_modules/*
+hybrid-programs/out/
+*/.metals/
+*/package-lock.json
+hpserver/.bloop/
+hpserver/target/
+hpserver/project/.bloop/
+hpserver/project/target/
+hpserver/project/project/
