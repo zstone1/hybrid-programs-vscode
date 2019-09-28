@@ -50,7 +50,7 @@ class HPLang {
   @JsonRequest("textDocument/hover")
   def hover(params: TextDocumentPositionParams): CompletableFuture[Hover] = {
   //  throw new Exception("inside scala hover")
-  val h = new Hover(new MarkupContent("markdown", "yay hover text"))
+  val h = new Hover(new MarkupContent("markdown", "yay hover text 2"))
   return CompletableFuture.completedFuture(h)
   }
 }

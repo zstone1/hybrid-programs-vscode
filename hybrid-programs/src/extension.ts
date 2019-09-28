@@ -42,7 +42,7 @@ export function deactivate(): Thenable<void> {
   }
 function launchLSPClient(context: vscode.ExtensionContext) {
 	console.log("in launch client");
-	let p = context.asAbsolutePath(path.join('hpserver','target','universal','stage','bin','hpserver.bat'));
+	let p = context.asAbsolutePath(path.join('..','hpserver','target','universal','stage','bin','hpserver.bat'));
 	let serverRun :Executable = {
         command: p
 	};
