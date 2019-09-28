@@ -28,6 +28,7 @@ mainClass in Compile := Some("main.MainLaunch")
 // You can define other libraries as dependencies in your build like this:
 libraryDependencies += "org.typelevel" %% "cats-core" % "1.6.0"
 libraryDependencies += "org.eclipse.lsp4j" % "org.eclipse.lsp4j" % "0.8.1"
+libraryDependencies += "edu.cmu.cs.ls" % "keymaerax" % "4.7.2" from "https://github.com/LS-Lab/KeYmaeraX-release/releases/download/4.7.2/keymaerax.jar"
 
 // Here, `libraryDependencies` is a set of dependencies, and by using `+=`,
 // we're adding the cats dependency to the set of dependencies that sbt will go

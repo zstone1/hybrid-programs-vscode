@@ -167,7 +167,7 @@
         "name": "program.ode"
       },
       "logicOp": {
-        "match": "&&|\\|\\||->|<->|!",
+        "match": "&|\\||->|<->|!",
         "name": "keyword.logic.operator"
       },
       "quantifier": {
